@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { BadRequestException, decodeToken, fileFieldValidation, keys, localFileUpload, successResponse } from "../../common/index.js";
+import { BadRequestException, decodeToken, fileFieldValidation,  localFileUpload, successResponse } from "../../common/index.js";
 import { deleteMessage, getMessage, getMessages, sendMessage } from "./message.service.js";
-import { validation } from "../../middleware/validtion.meiddleware.js";
+import { validation ,authentication} from "../../middleware/index.js";
 import * as validators from './message.validation.js'
-import { authentication } from "../../middleware/authentication.middleware.js";
+
 
 const router = Router()
 

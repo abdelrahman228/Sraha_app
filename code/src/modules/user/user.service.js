@@ -1,10 +1,10 @@
 import { ACCESS_EXPIRES_IN, REFRESH_EXPIRES_IN } from "../../../config/config.service.js"
-import { LogoutEnum } from "../../common/enums/security.enums.js"
+import { LogoutEnum } from "../../common/enums/index.js"
 import { baseRevokeTokenKey, deletKey, keys, revokeTokenKey, set, ttl } from "../../common/services/index.js"
 import { ConflictException, NotFoundException } from "../../common/utils/index.js"
-import { compareHash, createLoginCredentials, decodeToken, generateHash } from "../../common/utils/security/index.js"
-import { createOne, deleteMany, findOne } from "../../DB/database.repository.js"
-import { tokenModel, UserModel } from "../../DB/index.js"
+import { compareHash, createLoginCredentials, generateHash } from "../../common/utils/security/index.js"
+import {  findOne } from "../../DB/index.js"
+import {  UserModel } from "../../DB/index.js"
 
 const creatRevokeToken = async ({ userID, jti, ttl }) => {
     await set({

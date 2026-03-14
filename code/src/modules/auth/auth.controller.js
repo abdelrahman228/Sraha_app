@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { confirmEmail, confirmLogin, login, loginWithGmail, requestEnableTwoFactor, requestForgotPasswordOTP, reSendConfirmEmail, resetForgotPasswordOtp, signup, signupWithGmail, verifyEnableTwoFactor, verifyForgotPasswordOTP } from './auth.service.js';
-import { BadRequestException, successResponse } from '../../common/utils/index.js';
+import {  successResponse } from '../../common/utils/index.js';
 import * as validators from './auth.validation.js'
 import { validation } from '../../middleware/index.js';
 import rateLimit, { ipKeyGenerator } from 'express-rate-limit';

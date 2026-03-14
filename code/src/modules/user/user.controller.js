@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { logout, profile, profileCoverImage, profileImage, rotateToken, shareProfile, updatePassword } from "./user.service.js";
-import { successResponse, verifytToken } from "../../common/utils/index.js";
+import { successResponse } from "../../common/utils/index.js";
 import { authentication, authorization, validation } from "../../middleware/index.js";
-import { TokecTypeEnum } from "../../common/enums/security.enums.js";
+import { TokecTypeEnum } from "../../common/enums/index.js";
 import { RoleEnum } from "../../common/enums/user.enum.js";
 import { fileFieldValidation, localFileUpload } from "../../common/utils/multer/index.js";
 import * as validators from './user.validation.js'

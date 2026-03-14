@@ -1,5 +1,5 @@
 
-import { NODE_ENV, ORIGINS, port } from '../config/config.service.js'
+import {  port } from '../config/config.service.js'
 import { globalErrorHandling } from './common/utils/index.js'
 import { authenticationDB, connectRedis } from './DB/index.js'
 import { authRouter, messageRouter, userRouter } from './modules/index.js'

@@ -1,10 +1,9 @@
-import { ProviderEnum, RoleEnum, TokecTypeEnum } from "../../common/enums/index.js";
-import { BadRequestException, ConflictException, NotFoundException, compareHash, createLoginCredentials, createNumberOtp, decrypt, emailEmitter, emailTemplate, encrypt, generatToken, generateHash, generateOtp, getTokenSignature, sendEmail, successResponse } from "../../common/utils/index.js";
-import { UserModel, findOne, createOne, updateOne, findOneAndUpdate } from "../../DB/index.js";
+import { ProviderEnum} from "../../common/enums/index.js";
+import { BadRequestException, ConflictException, NotFoundException, compareHash, createLoginCredentials, createNumberOtp, decrypt, emailEmitter, emailTemplate, encrypt, generateHash, sendEmail, successResponse } from "../../common/utils/index.js";
+import { UserModel, findOne, createOne,  findOneAndUpdate } from "../../DB/index.js";
 
 import { OAuth2Client } from 'google-auth-library';
-import { baseRevokeTokenKey, deletKey, get, increment, keys, otpBlockKey, otpKye, otpMaxRequestKye, revokeTokenKey, set, ttl, update } from "../../common/index.js";
-import { hashSync } from "bcrypt";
+import { baseRevokeTokenKey, deletKey, get, increment, keys, otpBlockKey, otpKye, otpMaxRequestKye,set, ttl} from "../../common/index.js";
 
 const sendEamilOtp = async ({ email, subject, title } = {}) => {
     //check block condition

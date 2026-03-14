@@ -1,5 +1,5 @@
 import joi from 'joi'
-import { generalValidationFields } from '../../common/utils/validation.js'
+import { generalValidationFields } from '../../common/utils/index.js'
 import { fileFieldValidation } from '../../common/utils/index.js'
 
 export const updatePassword = {
