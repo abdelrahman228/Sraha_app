@@ -1,4 +1,4 @@
-import { ProviderEnum} from "../../common/enums/index.js";
+import { EmailEnum, ProviderEnum} from "../../common/enums/index.js";
 import { BadRequestException, ConflictException, NotFoundException, compareHash, createLoginCredentials, createNumberOtp, decrypt, emailEmitter, emailTemplate, encrypt, generateHash, sendEmail, successResponse } from "../../common/utils/index.js";
 import { UserModel, findOne, createOne,  findOneAndUpdate } from "../../DB/index.js";
 

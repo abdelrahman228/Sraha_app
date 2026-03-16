@@ -41,7 +41,8 @@ async function bootstrap() {
         windowMs: 15 * 60 * 1000, // 15 minutes
         limit: async function (req) {
             // const { country_code } = await fromWhere(req.ip)|| {} 
-            const {country} = geoip.lookup(req.ip)
+            const {geo} = geoip.lookup(req.ip)
+            const country = geo?.country || "unknown"
             return country == "EG" ? 5 : 3;
         },
         legacyHeaders: false,

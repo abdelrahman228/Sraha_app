@@ -5,7 +5,7 @@ import { BadRequestException, decodeToken, ForbiddenException } from "../common/
 
 export const authentication = (tokenType = TokecTypeEnum.access) => {
     return async (req, res, next) => {
-        if (!req?.headers?.authentication) {
+        if (!req?.headers?.authorization) {
             throw BadRequestException({ message: "Missing athorization key" })
         }
         const { authorization } = req.headers

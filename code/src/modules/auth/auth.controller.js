@@ -6,6 +6,7 @@ import { validation } from '../../middleware/index.js';
 import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
 import geoip from 'geoip-lite'
 import { redisClient } from '../../DB/redis.connection.db.js';
+import { deletKey } from '../../common/index.js';
 const router = Router();
 
 const loginLimiter = rateLimit({
@@ -45,7 +46,7 @@ const loginLimiter = rateLimit({
 
 router.post("/login",loginLimiter ,validation(validators.login), async (req, res, next) => {
     const account = await login(req.body, `${req.protocol}://${req.host}`)
-    await deletekey(`${req.ip}-${req.path}`)
+    await deletKey(`${req.ip}-${req.path}`)
     return successResponse({ res, data: { account } })
 })
 

@@ -55,7 +55,7 @@ export const getSignatureLevel = async (audienceType) => {
     return signatuerLevel
 }
 
-export const createLoginCredentials = async (uesr, issuer) => {
+export const createLoginCredentials = async (user, issuer) => {
     const { accessSignatuer, refreshSignatuer, audience } = await getTokenSignature(user.role)
 const jwtid = randomUUID()
     const access_token = await generatToken({
@@ -96,7 +96,7 @@ export const decodeToken = async ({ token, tokenType = TokecTypeEnum.access }) =
             can not access this api while we expected token of type ${tokenType} `
         })
     }
-    if (decode.jit && await get(revokeTokenKey({userID:decode.sub,jti:decode.jti}))) {
+    if (decode.jti && await get(revokeTokenKey({userID:decode.sub,jti:decode.jti}))) {
         throw UnauthorizedException({ message: "Invalid login session" })
         
     }
@@ -109,13 +109,13 @@ export const decodeToken = async ({ token, tokenType = TokecTypeEnum.access }) =
         secret: tokenType == TokecTypeEnum.refresh ? refreshSignatuer : accessSignatuer
     })
 
-    const uesr = await findOne({ model: UserModel, filter: { _id: verifyData.sub } })
+    const user = await findOne({ model: UserModel, filter: { _id: verifyData.sub } })
     if (!user) {
         throw UnauthorizedException({ message: "Not Register account" })
     }
-    if (user.changeCredentialsTime && uesr.changeCredentialsTime?.getTme() >= decode.iat * 1000) {
+    if (user.changeCredentialsTime && user.changeCredentialsTime?.getTime() >= decode.iat * 1000) {
         throw UnauthorizedException({ message: "Invalid login session" })
     }
 
-    return {uesr,decode}
+    return {user,decode}
 }

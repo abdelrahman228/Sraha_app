@@ -52,6 +52,7 @@ router.patch(
 
 router.get(
     "/",
+    authentication(),
     authorization([RoleEnum.Admin, RoleEnum.User]),
     async (req, res, next) => {
 
