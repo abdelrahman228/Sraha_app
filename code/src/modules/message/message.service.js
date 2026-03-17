@@ -4,18 +4,18 @@ import { MessageModel, UserModel } from "../../DB/index.js"
 
 
 export const sendMessage = async (receiverId, { content = undefined } = {}, files, user) => {
-    const accont = await findOne({
+    const account = await findOne({
         model: UserModel,
         filter: { _id: receiverId, confirmEmail: { $exists: true } }
     })
-    if (!accont) {
-        throw NotFoundException({ message: "File to find matching receiver account" })
+    if (!account) {
+        throw NotFoundException({ message: "Fail to find matching receiver account" })
     }
     const message = await createOne({
-        model: messageModel,
+        model: MessageModel,
         data: {
             content,
-            attachments: files.map((file) => file.finalPath),
+            attachments: files ? files.map((file) => file.finalPath) : [],
             receiverId,
             senderId: user ? user._id : undefined
         }

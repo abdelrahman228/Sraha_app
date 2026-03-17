@@ -20,8 +20,8 @@ export const authentication = (tokenType = TokecTypeEnum.access) => {
                 const [username, password] = data.split(":")
                 break;
             case 'Bearer':
-                const {uesr,decode} = await decodeToken({ token: credential, tokenType })
-                req.uesr=uesr
+                const {user,decode} = await decodeToken({ token: credential, tokenType })
+                req.user=user
                 req.decode=decode
                 break;
             default:
@@ -34,7 +34,7 @@ export const authentication = (tokenType = TokecTypeEnum.access) => {
 export const authorization = (accessRoles = [], tokenType = TokecTypeEnum.access) => {
     return async (req, res, next) => {
       
-        if (!accessRoles.includes(req, user.role)) {
+        if (!accessRoles.includes(req.user.role)) {
             throw ForbiddenException({ message: "Not allowed account" })
         }
         next()

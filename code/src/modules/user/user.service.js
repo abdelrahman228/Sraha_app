@@ -2,7 +2,7 @@ import { ACCESS_EXPIRES_IN, REFRESH_EXPIRES_IN } from "../../../config/config.se
 import { LogoutEnum } from "../../common/enums/index.js"
 import { baseRevokeTokenKey, deletKey, keys, revokeTokenKey, set, ttl } from "../../common/services/index.js"
 import { ConflictException, NotFoundException } from "../../common/utils/index.js"
-import { compareHash, createLoginCredentials, generateHash } from "../../common/utils/security/index.js"
+import { compareHash, createLoginCredentials, generateHash, decrypt } from "../../common/utils/security/index.js"
 import {  findOne } from "../../DB/index.js"
 import {  UserModel } from "../../DB/index.js"
 
@@ -76,11 +76,10 @@ export const shareProfile = async (userId) => {
         throw NotFoundException({ message: "Fail to find matching profile" })
     }
     if (profile.phone) {
-        profile.phone = await generateDecryption(profile.phone)
+        profile.phone = await decrypt(profile.phone)
     }
     return profile
 }
-
 export const updatePassword = async ({ oldPassword, newPassword }, user, issuer) => {
     if (!await compareHash({ plainText: oldPassword, cipherText: user.password })) {
         throw ConflictException({ message: 'Invalid old password' });

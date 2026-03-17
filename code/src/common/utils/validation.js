@@ -15,7 +15,7 @@ export const generalValidationFields = {
         return joi.string().valid(joi.ref(path))
     },
     id: joi.string().custom((value, helper) => {
-        return Types.ObjectId.isValid(valid) ? true : helper.message("Invalid objectId")
+        return Types.ObjectId.isValid(value) ? true : helper.message("Invalid objectId")
     }),
     file: function (validation = []) {
         return joi.object().keys({

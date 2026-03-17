@@ -13,7 +13,8 @@ export const sendMessage = {
         receiverId:generalValidationFields.id.required()
     }).required(),
     body: joi.object().keys({
-        content: joi.string().min(2).max(10000)
+        content: joi.string().min(2).max(10000),
+        attachments: joi.any()
     }),
     file: joi.array().items(generalValidationFields.file(fileFieldValidation.image)).min(0).max(2)
 }

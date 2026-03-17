@@ -47,7 +47,7 @@ const loginLimiter = rateLimit({
 router.post("/login",loginLimiter ,validation(validators.login), async (req, res, next) => {
     const account = await login(req.body, `${req.protocol}://${req.host}`)
     await deletKey(`${req.ip}-${req.path}`)
-    return successResponse({ res, data: { account } })
+    return successResponse({ res, data: { ...account } })
 })
 
 router.post("/signup",
